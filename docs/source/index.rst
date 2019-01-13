@@ -40,6 +40,7 @@
 
    preface
    board
+   prompt
    variable
    led
    pwm_led
