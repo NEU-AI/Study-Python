@@ -44,7 +44,10 @@
    variable
    led
    pwm_led
+   game2048
+   snake   
    wifi
+   etag
    knows
 
 Indices and tables
