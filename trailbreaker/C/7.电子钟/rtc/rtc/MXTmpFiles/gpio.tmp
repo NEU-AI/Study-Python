@@ -1,0 +1,40 @@
+
+/**
+#t* @brief GPIO Initialization Function
+#t* @param None
+#t* @retval None
+#t*/
+static void MX_GPIO_Init(void)
+{
+#tGPIO_InitTypeDef GPIO_InitStruct = {0};
+#n#t/* GPIO Ports Clock Enable */
+#t__HAL_RCC_GPIOA_CLK_ENABLE();
+#t__HAL_RCC_GPIOB_CLK_ENABLE();
+#t__HAL_RCC_GPIOC_CLK_ENABLE();
+#n#t/*Configure GPIO pin Output Level */
+#tHAL_GPIO_WritePin(GPIOA, LED_X1_Pin|LED_X2_Pin|LED_X3_Pin|LED_X4_Pin, GPIO_PIN_RESET);
+#n#t/*Configure GPIO pin Output Level */
+#tHAL_GPIO_WritePin(GPIOB, LED_Y5_Pin|LED_Y6_Pin|LED_Y7_Pin|LED_Y8_Pin #n#t#t#t#t#t#t#t#t#t#t#t#t#t|LED_Y3_Pin|LED_Y4_Pin, GPIO_PIN_RESET);
+#n#t/*Configure GPIO pin Output Level */
+#tHAL_GPIO_WritePin(GPIOC, LED_Y1_Pin|LED_Y2_Pin, GPIO_PIN_RESET);
+#n#t/*Configure GPIO pins : LED_X1_Pin LED_X2_Pin LED_X3_Pin LED_X4_Pin */
+#tGPIO_InitStruct.Pin = LED_X1_Pin|LED_X2_Pin|LED_X3_Pin|LED_X4_Pin;
+#tGPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+#tGPIO_InitStruct.Pull = GPIO_NOPULL;
+#tGPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+#tHAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+#n#t/*Configure GPIO pins : LED_Y5_Pin LED_Y6_Pin LED_Y7_Pin LED_Y8_Pin #n#t#t#t#t#t#t#t#t#t#t#t#t#t LED_Y3_Pin LED_Y4_Pin */
+#tGPIO_InitStruct.Pin = LED_Y5_Pin|LED_Y6_Pin|LED_Y7_Pin|LED_Y8_Pin #n#t#t#t#t#t#t#t#t#t#t#t#t#t|LED_Y3_Pin|LED_Y4_Pin;
+#tGPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+#tGPIO_InitStruct.Pull = GPIO_NOPULL;
+#tGPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+#tHAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+#n#t/*Configure GPIO pins : LED_Y1_Pin LED_Y2_Pin */
+#tGPIO_InitStruct.Pin = LED_Y1_Pin|LED_Y2_Pin;
+#tGPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+#tGPIO_InitStruct.Pull = GPIO_NOPULL;
+#tGPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+#tHAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+#n
+}
+#n
