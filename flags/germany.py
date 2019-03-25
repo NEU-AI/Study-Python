@@ -26,8 +26,8 @@ def germany():
     rect(-75,50,'black',75,16)
     rect(-75,16,'red',75,-16)
     rect(-75,-17,'gold',75,-50)
-    
+
+turtle.reset()
 turtle.speed(0)
+#turtle.delay(0)
 germany()
-
-

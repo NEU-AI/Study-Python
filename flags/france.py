@@ -23,14 +23,12 @@ def rect(x, y, color, x2, y2):
     turtle.end_fill()
 
 def france():
-    #turtle.clear()
     rect(-120, 160, 'black', 120, -160)
     rect(-75, 50, 'blue', -25, -50)
     rect(-25, 50, 'white', 25, -50)
     rect(25,  50, 'red', 75,   -50)
-    
-#turtle.delay(0)    
+
+turtle.clear()
 turtle.speed(0)
+#turtle.delay(0)
 france()
-
-

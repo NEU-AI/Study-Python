@@ -1,7 +1,7 @@
-
 import uturtle
 
 turtle = uturtle.Turtle()
+
 def rect(x, y, color, x2, y2):
     width = abs(x2 - x)
     height = abs(y2 - y)
@@ -22,12 +22,12 @@ def rect(x, y, color, x2, y2):
     turtle.forward(height)
     turtle.end_fill()  
 
-
 turtle.reset()
 turtle.speed(0)
+#turtle.delay(0)
 height = 100
 width = 100 * 3 / 2
-rect(-110, 150, 'gray', 110, -150)
+rect(-120, 160, 'gray', 120, -160)
 rect(-width/2, height/2, 'white', width/2, -height/2)
 
 r = height*0.6/2
@@ -40,5 +40,3 @@ turtle.setheading(90)
 turtle.color('red', 'red')
 turtle.circle(r)
 turtle.end_fill()
-
-
