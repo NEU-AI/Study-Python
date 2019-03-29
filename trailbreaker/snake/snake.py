@@ -1,6 +1,3 @@
-
-
-
 import lcd_show
 from lcd_show import *
 from font import *
@@ -19,7 +16,7 @@ pins = ['Y7','Y8','Y5','Y6']
 keys = []
 for p in pins:
 	keys.append(Pin(p,Pin.IN,Pin.PULL_UP))
-class Grid(object):
+class Grid(object):#网格类
 	def __init__(self, master=None,x=8, y=8, w=12, h=12):
 		self.x = x
 		self.y = y
@@ -36,29 +33,29 @@ class Grid(object):
 		disp.putrect(x,y,8,8,color)
 
 		
-class Food(object):
+class Food(object):#食物类
 	def __init__(self, grid, color = disp.GREEN):
 		self.grid = grid
 		self.color = color
 		self.set_pos()
 		self.type = 1
-	def set_pos(self):
+	def set_pos(self):#随机生成食物位置
 		x = randint(0, 12)
 		y = randint(0, 12)
 		self.pos = (x, y)
-	def display(self):
+	def display(self):#画点
 		self.grid.draw(self.pos, self.color)
 		
 		
-class Snake(object):
-	def __init__(self, grid, color = disp.BLUE):
+class Snake(object):#蛇类
+	def __init__(self, grid, color = disp.BLUE):#初始化蛇身位置，方向，颜色
 		self.grid = grid
 		self.color = color
 		self.body = [(5, 5), (5, 6), (5, 7)]
 		self.direction = "Up"
 		for i in self.body:
 			self.grid.draw(i, self.color)
-	def initial(self):
+	def initial(self):#重新开始游戏时初始化蛇身位置，方向，颜色
 		while not len(self.body) == 0:
 			pop = self.body.pop()
 			self.grid.draw(pop, disp.WHITE)
@@ -67,12 +64,12 @@ class Snake(object):
 		self.color = disp.BLUE
 		for i in self.body:
 			self.grid.draw(i, self.color)
-	def move(self, new):
+	def move(self, new):#移动
 		self.body.insert(0, new)
 		pop = self.body.pop()
 		self.grid.draw(pop, self.grid.bg)
 		self.grid.draw(new, self.color)
-	def add(self ,new):
+	def add(self ,new):#长度增加
 		self.body.insert(0, new)
 		self.grid.draw(new, self.color)
 		
@@ -98,7 +95,7 @@ class Snake(object):
 		self.body.insert(0, new)
 		for item in self.body:
 			self.grid.draw(item, self.color)
-class SnakeGame():	
+class SnakeGame():	#游戏类
 	def __init__(self):
 		self.grid = Grid()
 		print('1')
@@ -112,7 +109,7 @@ class SnakeGame():
 		self.speed = 300
 		self.display_food()
 		print('4')
-	def display_food(self):
+	def display_food(self):#生成不同种食物
         	
 		if randint(0, 40) == 5:
 			self.food.color = disp.ORANGE
@@ -139,7 +136,7 @@ class SnakeGame():
 				self.food.set_pos()
 			self.food.display()
 		print(self.food.type)
-	def initial(self):
+	def initial(self):#游戏结束时，重新开始
 		self.gameover = False
 		self.score = 0
 		self.snake.initial()
