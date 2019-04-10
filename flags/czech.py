@@ -24,7 +24,8 @@ def rect(x, y, color, x2, y2):
 turtle.reset()
 turtle.speed(0)
 #turtle.delay(0)
-rect(-120, 160, 'gray', 120, -160)
+turtle.bgcolor('black')
+turtle.clear()
 rect(-75, 50, 'white', 75, 0)
 rect(-75, 0, 'red', 75, -50)
 
