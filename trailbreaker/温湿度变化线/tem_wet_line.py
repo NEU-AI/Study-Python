@@ -14,7 +14,7 @@ disp = DISPLAY(usrspi,cs=Pin('X5', Pin.OUT),res=Pin('X4', Pin.OUT),led_en=Pin('X
 x1=40
 y=0
 x2=80
-disp.clr(disp.WHITE)#清屏
+disp.clr(disp.WHITE)#清屏（白色）
 class DHT11:#定义DHT11类
     def __init__(self,pin_):#初始化
         #self.data=[]
