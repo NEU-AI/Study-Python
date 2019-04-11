@@ -1,0 +1,25 @@
+--cpu=Cortex-M4.fp
+"led88\startup_stm32f405xx.o"
+"led88\main.o"
+"led88\stm32f4xx_it.o"
+"led88\stm32f4xx_hal_msp.o"
+"led88\stm32f4xx_hal_tim.o"
+"led88\stm32f4xx_hal_tim_ex.o"
+"led88\stm32f4xx_hal_rcc.o"
+"led88\stm32f4xx_hal_rcc_ex.o"
+"led88\stm32f4xx_hal_flash.o"
+"led88\stm32f4xx_hal_flash_ex.o"
+"led88\stm32f4xx_hal_flash_ramfunc.o"
+"led88\stm32f4xx_hal_gpio.o"
+"led88\stm32f4xx_hal_dma_ex.o"
+"led88\stm32f4xx_hal_dma.o"
+"led88\stm32f4xx_hal_pwr.o"
+"led88\stm32f4xx_hal_pwr_ex.o"
+"led88\stm32f4xx_hal_cortex.o"
+"led88\stm32f4xx_hal.o"
+"led88\stm32f4xx_hal_exti.o"
+"led88\system_stm32f4xx.o"
+--library_type=microlib --strict --scatter "led88\led88.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "led88.map" -o led88\led88.axf

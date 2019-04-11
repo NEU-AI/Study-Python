@@ -1,6 +1,7 @@
 import uturtle
 
 turtle = uturtle.Turtle()
+
 def rect(x, y, color, x2, y2):
     width = abs(x2 - x)
     height = abs(y2 - y)
@@ -35,7 +36,3 @@ turtle.goto(-75, 50)
 turtle.goto(-75, -50)
 turtle.goto(0, 0)
 turtle.end_fill()
-
-
-
-
