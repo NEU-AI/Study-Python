@@ -98,27 +98,27 @@ int main(void)
 	/* Configure IO Direction mode (Input, Output, Alternate or Analog) */
 	temp = GPIOB->MODER;
 	temp &= ~(GPIO_MODER_MODER0 << (4 * 2U));
-	temp |= ((GPIO_MODE_OUTPUT_PP & GPIO_MODE) << (4 * 2U));
+	temp |= ((GPIO_MODE_OUTPUT_PP & GPIO_MODE) << (4 * 2U));//设置PIN4推挽输出
 	GPIOB->MODER = temp;
 
 	/* In case of Output or Alternate function mode selection */
 	/* Configure the IO Speed */
 	temp = GPIOB->OSPEEDR; 
 	temp &= ~(GPIO_OSPEEDER_OSPEEDR0 << (4 * 2U));
-	temp |= (GPIO_SPEED_FREQ_LOW << (4 * 2U));
+	temp |= (GPIO_SPEED_FREQ_LOW << (4 * 2U));//设置PIN4低速率输出
 	GPIOB->OSPEEDR = temp;
 
 	/* Configure the IO Output Type */
 	temp = GPIOB->OTYPER;
 	temp &= ~(GPIO_OTYPER_OT_0 << 4) ;
-	temp |= (((GPIO_MODE_OUTPUT_PP & GPIO_OUTPUT_TYPE) >> 4U) << 4);
+	temp |= (((GPIO_MODE_OUTPUT_PP & GPIO_OUTPUT_TYPE) >> 4U) << 4);//设置PIN4输出模式
 	GPIOB->OTYPER = temp;
 
 
 	/* Activate the Pull-up or Pull down resistor for the current IO */
 	temp = GPIOB->PUPDR;
 	temp &= ~(GPIO_PUPDR_PUPDR0 << (4 * 2U));
-	temp |= ((GPIO_NOPULL) << (4 * 2U));
+	temp |= ((GPIO_NOPULL) << (4 * 2U));//设置PIN4无上拉模式
 	GPIOB->PUPDR = temp;
 
 
