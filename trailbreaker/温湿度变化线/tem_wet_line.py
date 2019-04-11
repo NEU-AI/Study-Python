@@ -74,7 +74,7 @@ class DHT11:#定义DHT11类
         temperature_point=0
         check=0
         for i in range(7):#计算温湿度
-            humidity+=humidity_bit[i]*2**(7-i)
+            humidity+=humidity_bit[i]*2**(7-i)#第0位*2**7+第一位*2**6+···+第七位*2**0
             humidity_point+=humidity_point_bit[i]*2**(7-i)
             temperature+=temperature_bit[i]*2**(7-i)
             temperature_point+=temperature_point_bit[i]*2**(7-i)
