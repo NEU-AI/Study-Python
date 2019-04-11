@@ -62,17 +62,18 @@ class DHT11:#定义DHT11类
 		#print(k)
         j=0
         #get temperature
-        humidity_bit=data[0:7]#利用接收的电平信号算出温湿度数值
-        humidity_point_bit=data[8:15]
-        temperature_bit=data[16:23]
-        temperature_point_bit=data[24:31]
-        check_bit=data[32:39]
+		#利用接收的电平信号算出温湿度数值
+        humidity_bit=data[0:7]#0-7位湿度信息
+        humidity_point_bit=data[8:15]#8-15位湿度小数信息
+        temperature_bit=data[16:23]#16-23位温度信息
+        temperature_point_bit=data[24:31]#24-31位温度小数信息
+        check_bit=data[32:39]#32-39位校验信息
         humidity=0
         humidity_point=0
         temperature=0
         temperature_point=0
         check=0
-        for i in range(7):
+        for i in range(7):#计算温湿度
             humidity+=humidity_bit[i]*2**(7-i)
             humidity_point+=humidity_point_bit[i]*2**(7-i)
             temperature+=temperature_bit[i]*2**(7-i)
