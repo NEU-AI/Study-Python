@@ -27,13 +27,13 @@ class pics():
 		#设备状态
 		self.ON = "1"
 		self.OFF = "0"
-		self.d=" "
-		self.c = MQTTClient(self.CLIENT_ID, self.SERVER, self.SERVER_PORT)
-	def drawInterface(self):
+		self.d=" "#初始化要发送的信息
+		self.c = MQTTClient(self.CLIENT_ID, self.SERVER, self.SERVER_PORT)#定义一个mqtt实例
+	def drawInterface(self):#界面初始化
 		bmp1=ubitmap.BitmapFromFile("pic/boy")
 		bmp2=ubitmap.BitmapFromFile("pic/girl")
-		bmp1.draw(20,200)
-		bmp2.draw(140,200)
+		bmp1.draw(20,200)#显示boy图片
+		bmp2.draw(140,200)#显示girl图片
 		screen.drawline(0, 160, 240, 160, 2, 0xff0000)
 		
 	def do_connect(self):
@@ -49,12 +49,12 @@ class pics():
 			pass
 		print('Network config:', sta_if.ifconfig())
 		gc.collect()
-	def selectInit(self):
+	def selectInit(self):#选择表情初始化
 		screen.drawline(20, 200, 92, 200, 2, 0xff0000)
 		screen.drawline(92, 200, 92, 272, 2, 0xff0000)
 		screen.drawline(92, 272, 20, 272, 2, 0xff0000)
 		screen.drawline(20, 272, 20, 200, 2, 0xff0000)
-	def displayInit(self):
+	def displayInit(self):#初始化
 		screen.clear()
 		self.drawInterface()
 		self.selectInit()
@@ -70,9 +70,8 @@ class pics():
 	
 	
 	def keyboardEvent(self, key):
-        # 右移选择键
-		if self.keymatch[key] == "Key1":
-			if self.select%2==1:
+		if self.keymatch[key] == "Key1":#右移键，选择要发送的表情
+			if self.select%2==1:#用红色框选中boy表情
 				screen.drawline(20, 200, 92, 200, 2, 0xffffff)
 				screen.drawline(92, 200, 92, 272, 2, 0xffffff)
 				screen.drawline(92, 272, 20, 272, 2, 0xffffff)
@@ -82,7 +81,7 @@ class pics():
 				screen.drawline(212, 272, 140, 272, 2, 0xff0000)
 				screen.drawline(140, 272, 140, 200, 2, 0xff0000)
 				self.select+=1
-			else:
+			else:#用红色框选中girl表情
 				screen.drawline(140, 200, 212, 200, 2, 0xffffff)
 				screen.drawline(212, 200, 212, 272, 2, 0xffffff)
 				screen.drawline(212, 272, 140, 272, 2, 0xffffff)
@@ -92,25 +91,25 @@ class pics():
 				screen.drawline(92, 272, 20, 272, 2, 0xff0000)
 				screen.drawline(20, 272, 20, 200, 2, 0xff0000)
 				self.select+=1
-		if self.keymatch[key] == "Key3":
-			if self.select%2==1:
+		if self.keymatch[key] == "Key3":#发送表情按键
+			if self.select%2==1:#显示已发送boy表情
 				bmp1=ubitmap.BitmapFromFile("pic/boy")
 				bmp1.draw(140,40)
 				self.d="001"
-				self.c.publish(self.TOPIC2,self.d)
-			else:
+				self.c.publish(self.TOPIC2,self.d)#给服务器发送boy表情的号码
+			else:#显示已发送girl表情
 				bmp2=ubitmap.BitmapFromFile("pic/girl")
 				bmp2.draw(140,40)
 				self.d="002"
-				self.c.publish(self.TOPIC2,self.d)
-	def sub_cb(self,topic, message):
+				self.c.publish(self.TOPIC2,self.d)#给服务器发送girl表情的号码
+	def sub_cb(self,topic, message):#从服务器接受信息
 		message = message.decode()
 		print("服务器发来信息：%s" % message)
 		#global count
-		if message=="001":
+		if message=="001":#收到boy表情号码显示boy表情
 			bmp1=ubitmap.BitmapFromFile("pic/boy")
 			bmp1.draw(140,40)
-		elif message=="002":
+		elif message=="002":#收到girl表情号码显示girl表情
 			bmp1=ubitmap.BitmapFromFile("pic/girl")
 			bmp1.draw(140,40)
 		
@@ -119,14 +118,14 @@ class pics():
 	def start(self):
 		try:
 			while True:
-				self.c.check_msg()
-				i = 0
+				self.c.check_msg()#检查是否收到信息
+				i = 0#用来辅助判断那个按键被按下
 				j = -1
-				for k in self.keys:
-					if (k.value() == 0):
+				for k in self.keys:#检查按键是否被按下
+					if (k.value() == 0):##如果按键被按下
 						if i != j:
 							j = i
-							self.keyboardEvent(i)
+							self.keyboardEvent(i)#触发相应按键对应事件
 					i = i + 1
 					if (i > 3):
 						i = 0
