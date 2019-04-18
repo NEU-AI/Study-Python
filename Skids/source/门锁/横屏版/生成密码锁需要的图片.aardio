@@ -1,0 +1,279 @@
+import win.ui;
+/*DSG{{*/
+var winform = win.form(text="密码锁 Skids";right=319;bottom=239)
+winform.add(
+plus={cls="plus";left=0;top=0;right=320;bottom=240;z=1}
+)
+/*}}*/
+
+import fonts;
+import gdip.bitmap;
+import gdip.graphics;
+import gdip.solidBrush;
+import gdip.font;
+import gdip.stringformat;
+
+import auto.console;
+
+var base_dir = io.fullpath("/转换前的图片");
+//var font_path = io.joinpath(base_dir, "思源黑体SourceHanSansK-Medium.ttf");
+//var family = fonts.addFamily(font_path);
+var family = gdip.family("微软雅黑");
+//var family = gdip.family("Consolas");
+var font = gdip.font(family, 16);
+
+var stringformat = gdip.stringformat();
+stringformat.align		= 1/*_StringAlignmentNear*/;
+stringformat.lineAlign	= 1/*_StringAlignmentCenter*/;
+
+var brush_fg_default  = gdip.solidBrush(0xFF000000);
+var brush_fg_password = gdip.solidBrush(0xFF222222);
+var brush_fg_success  = gdip.solidBrush(0xFF00CC00);
+var brush_fg_failed   = gdip.solidBrush(0xFFCC0000);
+var brush_bg_default  = gdip.solidBrush(0xFFEEEEEE);
+var brush_bg_shadow   = gdip.solidBrush(0xFFCCCCCC);
+
+var H = 16;
+
+var get_length = (function(){
+	var bitmap = gdip.bitmap(1, 1);
+	var graphics = bitmap.getGraphics();
+	var rectf = ::RECTF(0, 0, 240, H);
+	var stringformat = gdip.stringformat();
+	stringformat.align		= 0/*_StringAlignmentNear*/;
+	stringformat.lineAlign	= 0/*_StringAlignmentNear*/;
+	
+	return function(str, brush){
+		var a = graphics.measureString(str, font, rectf, stringformat, brush)
+		console.log(str);
+		console.varDump(a);
+		var w = a.width;
+		return math.ceil(w);
+	};
+})();
+
+var generate_menu = function(info){
+	var w = get_length(info, brush_fg_default);
+	var h = H;
+	
+	var bitmap = gdip.bitmap(h + 2, w + 2);
+	var rectf = ::RECTF(0, 0, w, h);
+	
+	var graphics = bitmap.getGraphics();
+	graphics.smoothingMode = 3/*_SmoothingModeNone*/;
+	graphics.textRenderingHint = 3/*_TextRenderingHintAntiAliasGridFit*/;
+	graphics.rotate(90);
+	graphics.translate(0, -bitmap.width);
+	graphics.clear(0xFFFFFFFF);
+	graphics.fillRectangle(brush_bg_shadow, 2, 2, w, h);
+	graphics.fillRectangle(brush_bg_default, 0, 0, w, h);
+	graphics.drawString(info, font, rectf, stringformat, brush_fg_default);
+	graphics.delete();
+	
+	return bitmap;
+};
+
+var generate_tip = function(info){
+	var w = get_length(info, brush_fg_default);
+	var h = H;
+	
+	var bitmap = gdip.bitmap(h + 2, w + 2);
+	var rectf = ::RECTF(0, 0, w, h);
+	
+	var graphics = bitmap.getGraphics();
+	graphics.smoothingMode = 3/*_SmoothingModeNone*/;
+	graphics.textRenderingHint = 3/*_TextRenderingHintAntiAliasGridFit*/;
+	graphics.rotate(90);
+	graphics.translate(0, -bitmap.width);
+	graphics.clear(0xFFFFFFFF);
+	graphics.fillRectangle(brush_bg_shadow, 2, 2, w, h);
+	graphics.fillRectangle(brush_bg_default, 0, 0, w, h);
+	graphics.drawString(info, font, rectf, stringformat, brush_fg_default);
+	graphics.delete();
+	
+	return bitmap;
+};
+
+var generate_tip_success = function(info){
+	var w = get_length(info, brush_fg_success);
+	var h = H;
+	
+	var bitmap = gdip.bitmap(h + 2, w + 2);
+	var rectf = ::RECTF(0, 0, w, h);
+	
+	var graphics = bitmap.getGraphics();
+	graphics.smoothingMode = 3/*_SmoothingModeNone*/;
+	graphics.textRenderingHint = 3/*_TextRenderingHintAntiAliasGridFit*/;
+	graphics.rotate(90);
+	graphics.translate(0, -bitmap.width);
+	graphics.clear(0xFFFFFFFF);
+	graphics.fillRectangle(brush_bg_shadow, 2, 2, w, h);
+	graphics.fillRectangle(brush_bg_default, 0, 0, w, h);
+	graphics.drawString(info, font, rectf, stringformat, brush_fg_success);
+	graphics.delete();
+	
+	return bitmap;
+};
+
+var generate_tip_failed = function(info){
+	var w = get_length(info, brush_fg_failed);
+	var h = H;
+	
+	var bitmap = gdip.bitmap(h + 2, w + 2);
+	var rectf = ::RECTF(0, 0, w, h);
+	
+	var graphics = bitmap.getGraphics();
+	graphics.smoothingMode = 3/*_SmoothingModeNone*/;
+	graphics.textRenderingHint = 3/*_TextRenderingHintAntiAliasGridFit*/;
+	graphics.rotate(90);
+	graphics.translate(0, -bitmap.width);
+	graphics.clear(0xFFFFFFFF);
+	graphics.fillRectangle(brush_bg_shadow, 2, 2, w, h);
+	graphics.fillRectangle(brush_bg_default, 0, 0, w, h);
+	graphics.drawString(info, font, rectf, stringformat, brush_fg_failed);
+	graphics.delete();
+	
+	return bitmap;
+};
+
+var generate_tip_delay = function(info){
+	var w_left = get_length("0", brush_fg_default) - get_length(" ", brush_fg_default);
+	var w_right = get_length(info, brush_fg_default);
+	var w = w_left + w_right;
+	var h = H;
+	
+	var bitmap = gdip.bitmap(h + 2, w + 2);
+	var rectf = ::RECTF(w_left, 0, w_right, h);
+	
+	var graphics = bitmap.getGraphics();
+	graphics.smoothingMode = 3/*_SmoothingModeNone*/;
+	graphics.textRenderingHint = 3/*_TextRenderingHintAntiAliasGridFit*/;
+	graphics.rotate(90);
+	graphics.translate(0, -bitmap.width);
+	graphics.clear(0xFFFFFFFF);
+	graphics.fillRectangle(brush_bg_shadow, 2, 2, w, h);
+	graphics.fillRectangle(brush_bg_default, 0, 0, w, h);
+	graphics.drawString(info, font, rectf, stringformat, brush_fg_default);
+	graphics.delete();
+	
+	return bitmap;
+};
+
+var generate_password = (function(){
+	var w = get_length("0", brush_fg_default);
+	var h = H;
+	
+	var rectf = ::RECTF(0, 0, w, h);
+	
+	return function(char){
+		var bitmap = gdip.bitmap(h + 2, w);
+    	
+		var graphics = bitmap.getGraphics();
+		graphics.smoothingMode = 3/*_SmoothingModeNone*/;
+		graphics.textRenderingHint = 3/*_TextRenderingHintAntiAliasGridFit*/;
+		graphics.rotate(90);
+		graphics.translate(0, -bitmap.width);
+		graphics.clear(0xFFFFFFFF);
+		graphics.fillRectangle(brush_bg_shadow, 0, 2, w, h);
+		graphics.fillRectangle(brush_bg_default, 0, 0, w, h);
+		graphics.drawString(char, font, rectf, stringformat, brush_fg_password);
+		graphics.delete();
+		
+		return bitmap;
+	};
+})();
+
+var generate_splitter = function(){
+	var bitmap = gdip.bitmap(240, 2);
+    	
+	var graphics = bitmap.getGraphics();
+	graphics.smoothingMode = 3/*_SmoothingModeNone*/;
+	graphics.clear(0xFFFFFFFF);
+	graphics.fillRectangle(brush_fg_default, 0, 0, 240, 2);
+	graphics.delete();
+	
+	return bitmap;
+};
+
+
+var pic_tab = {};
+pic_tab.menu_S1_1 = generate_menu("S1：显示密码");
+pic_tab.menu_S1_2 = generate_menu("S1：隐藏密码");
+pic_tab.menu_S2   = generate_menu("S2：清空密码");
+pic_tab.menu_S4   = generate_menu("S4：删除密码");
+
+pic_tab.tip			= generate_tip("请输入解锁密码：");
+pic_tab.tip_success	= generate_tip_success("解锁成功！");
+pic_tab.tip_failed	= generate_tip_failed("解锁失败！");
+pic_tab.tip_delay	= generate_tip_delay(" 秒后返回...");
+
+pic_tab.password = {};
+pic_tab.password.blank = generate_password("　");
+pic_tab.password.mask  = generate_password("＊");
+pic_tab.password.num_0 = generate_password("０");
+pic_tab.password.num_1 = generate_password("１");
+pic_tab.password.num_2 = generate_password("２");
+pic_tab.password.num_3 = generate_password("３");
+pic_tab.password.num_4 = generate_password("４");
+pic_tab.password.num_5 = generate_password("５");
+pic_tab.password.num_6 = generate_password("６");
+pic_tab.password.num_7 = generate_password("７");
+pic_tab.password.num_8 = generate_password("８");
+pic_tab.password.num_9 = generate_password("９");
+
+pic_tab.splitter = generate_splitter();
+
+var bitmap = gdip.bitmap(320, 240);
+var graphics = bitmap.getGraphics();
+graphics.rotate(-90);
+graphics.translate(-bitmap.height, 0);
+graphics.clear(0xFFFFFFFF);
+graphics.smoothingMode = 3/*_SmoothingModeNone*/;
+
+graphics.drawImage(pic_tab.menu_S1_1,	80 + (18 + 13) * 2, 12);
+graphics.drawImage(pic_tab.menu_S2,		80 + (18 + 13) * 1, 12);
+graphics.drawImage(pic_tab.menu_S4,		80, 12);
+
+graphics.drawImage(pic_tab.password.blank, 50, 20 * 0);
+graphics.drawImage(pic_tab.password.mask, 50, 20 * 1);
+for(i=0;9;1){
+	graphics.drawImage(pic_tab.password["num_" ++ i], 50, 20 * (i + 2));
+}
+
+graphics.delete();
+
+winform.plus.setBackground(bitmap);
+
+var SAVE = false;
+SAVE = true;
+if(SAVE){
+	var pic_info = {};
+	io.createDir(io.joinpath(base_dir, "lock_pic", "password"));
+	for(k,v in pic_tab){
+    	if(v[["pBitmap"]]) {
+        	pic_info[k] = {
+        		w = v.width;
+        		h = v.height;
+        	};
+        	console.log(k, v)
+			v.save(io.joinpath(base_dir, "lock_pic", k + ".png"));
+		} else {
+        	pic_info[k] = {};
+			for(k2,v2 in v){
+        		pic_info[k][k2] = {
+        			w = v2.width;
+        			h = v2.height;
+        		};
+        		console.log("", k, k2, v2)
+				v2.save(io.joinpath(base_dir, "lock_pic", k, k2 + ".png"));
+			}
+		}
+	}
+	
+	import web.json;
+	string.save(io.joinpath(base_dir, "lock_pic", "pic.config"), web.json.stringify(pic_info, true));	
+}
+
+winform.show();
+win.loopMessage();
+return winform;
