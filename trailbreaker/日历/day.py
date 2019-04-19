@@ -77,14 +77,14 @@ t4=a[3]
 t5=a[4]
 t6=a[5]
 t7=a[6]
-x=(a[3]-1)%7*3
-y=((a[3]-1)//7+2)*2
-if a[3]>=10:#将当前日期用粉色标记出来
-	disp.putstr_back(x,y,str(a[3]),disp.WHITE,disp.WHITE)
-	disp.putstr_back(x,y,str(a[3]),disp.BLACK,disp.PINK)
+x=(a[2]-1)%7*3
+y=((a[2]-1)//7+2)*2
+if a[2]>=10:#将当前日期用粉色标记出来
+	disp.putstr_back(x,y,str(a[2]),disp.WHITE,disp.WHITE)
+	disp.putstr_back(x,y,str(a[2]),disp.BLACK,disp.PINK)
 else:
-	disp.putstr_back(x,y,'0'+str(a[3]),disp.WHITE,disp.WHITE)
-	disp.putstr_back(x,y,'0'+str(a[3]),disp.BLACK,disp.PINK)
+	disp.putstr_back(x,y,'0'+str(a[2]),disp.WHITE,disp.WHITE)
+	disp.putstr_back(x,y,'0'+str(a[2]),disp.BLACK,disp.PINK)
 
 
 s1='year:'+str(t1)
