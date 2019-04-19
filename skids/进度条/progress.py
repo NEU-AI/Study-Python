@@ -1,54 +1,28 @@
-import uturtle
 from machine import Timer
 import text
 import screen
-turtle = uturtle.Turtle()
+import time
 class prog():
 	def __init__(self):
 		screen.clear()
-	def rect1(self,x, y, color, x2, y2):
-		width = abs(x2 - x)
-		height = abs(y2 - y)
-		turtle.pencolor(color)
-		turtle.penup()
-		turtle.goto(x,y)
-		turtle.pendown()
-		turtle.setheading(0)
-		turtle.fd(width)
-		turtle.right(90)
-		turtle.forward(height)
-		turtle.right(90)
-		turtle.forward(width)
-		turtle.right(90)
-		turtle.forward(height)
-	def rect2(self,x, y, color, x2, y2):
-		width = abs(x2 - x)
-		height = abs(y2 - y)
-		turtle.pencolor(color)
-		turtle.penup()
-		turtle.goto(x,y)
-		turtle.pendown()
-		turtle.setheading(0)
-		turtle.fillcolor(color)
-		turtle.begin_fill()
-		turtle.fd(width)
-		turtle.right(90)
-		turtle.forward(height)
-		turtle.right(90)
-		turtle.forward(width)
-		turtle.right(90)
-		turtle.forward(height)
-		turtle.end_fill()
-		
+		self.x=61
+		self.quit_flag = False
+		self.timer= Timer(-1)
+		screen.drawline(60, 100, 180, 100, 1, 0x000000)
+		screen.drawline(60, 130, 180, 130, 1, 0x000000)
+		screen.drawline(60, 100, 60, 130, 1, 0x000000)
+		screen.drawline(180, 100, 180, 130, 1, 0x000000)
+	def rect(self,z):
+		screen.drawline(self.x, 100, self.x, 130, 1, 0x000000)
+		self.x+=1
+		if self.x==180:
+			self.timer.deinit()
+			text.draw("加载完成",88,160,0xff0000)
+			self.quit_flag = True;
 	def progress(self):
-		self.rect1(-50,50,'black',50,30)
-		x0=-50
-		y0=50
-		timer= Timer(-1)
-		for i in range(1,26):
-			timer.init(mode=Timer.ONE_SHOT, period=1000,callback=self.rect2(x0,y0,'black',x0+4,30))	
-			x0+=4
-		text.draw("加载完成",88,160,0xff0000)	
+		self.timer.init(mode=Timer.PERIODIC, period=1000,callback=self.rect)
+		while not self.quit_flag:
+			time.sleep_ms(50)
 if __name__ == '__main__':
     pr = prog()
     pr.progress()
