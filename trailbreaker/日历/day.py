@@ -77,14 +77,14 @@ t4=a[3]
 t5=a[4]
 t6=a[5]
 t7=a[6]
-x=(a[3]-1)%7*3
-y=((a[3]-1)//7+2)*2
-if a[3]>=10:#将当前日期用粉色标记出来
-	disp.putstr_back(x,y,str(a[3]),disp.WHITE,disp.WHITE)
-	disp.putstr_back(x,y,str(a[3]),disp.BLACK,disp.PINK)
+x=(a[2]-1)%7*3
+y=((a[2]-1)//7+2)*2
+if a[2]>=10:#将当前日期用粉色标记出来
+	disp.putstr_back(x,y,str(a[2]),disp.WHITE,disp.WHITE)
+	disp.putstr_back(x,y,str(a[2]),disp.BLACK,disp.PINK)
 else:
-	disp.putstr_back(x,y,'0'+str(a[3]),disp.WHITE,disp.WHITE)
-	disp.putstr_back(x,y,'0'+str(a[3]),disp.BLACK,disp.PINK)
+	disp.putstr_back(x,y,'0'+str(a[2]),disp.WHITE,disp.WHITE)
+	disp.putstr_back(x,y,'0'+str(a[2]),disp.BLACK,disp.PINK)
 
 
 s1='year:'+str(t1)
@@ -104,27 +104,27 @@ while True:#显示时间变化
 	print(rtc.datetime())
 	a=rtc.datetime()
 
-	if t1!=a[0]:
+	if t1!=a[0]:#如果年份信息发生变化，清除原来信息，显示新的信息
 		disp.putstr(0,14,s1,disp.WHITE)
 		t1=a[0]
 		s1='year:'+str(a[0])
 		disp.putstr(0,14,s1,disp.BLACK)
-	if t2!=a[1]:
+	if t2!=a[1]:#如果月份信息发生变化，清除原来信息，显示新的信息
 		disp.putstr(11,14,s2,disp.WHITE)
 		t2=a[1]
 		s2='month:'+str(a[1])
 		disp.putstr(11,14,s2,disp.BLACK)
-	if t3!=a[2]:
+	if t3!=a[2]:#如果日期信息发生变化，清除原来信息，显示新的信息
 		disp.putstr(0,15,s3,disp.WHITE)
 		t3=a[2]
 		s3='day:'+str(a[2])
 		disp.putstr(0,15,s3,disp.BLACK)
-	if t4!=a[3]:
+	if t4!=a[3]:#如果星期信息发生变化，清除原来信息，显示新的信息
 		disp.putstr(11,15,s4,disp.WHITE)
 		t4=a[3]
 		s4='weekday:'+str(a[3])
 		disp.putstr(11,15,s4,disp.BLACK)
-	if t5!=a[4]:
+	if t5!=a[4]:#如果小时信息发生变化，清除原来信息，显示新的信息
 		if t5>=10:
 			disp.putstr(5,16,str(t5),disp.WHITE)
 		else:
@@ -134,7 +134,7 @@ while True:#显示时间变化
 			disp.putstr(5,16,str(a[4]),disp.BLACK)
 		else:
 			disp.putstr(5,16,' '+str(a[4]),disp.BLACK)
-	if t6!=a[5]:
+	if t6!=a[5]:#如果分钟信息发生变化，清除原来信息，显示新的信息
 		if t6>=10:
 			disp.putstr(8,16,str(t6),disp.WHITE)
 		else:
@@ -144,7 +144,7 @@ while True:#显示时间变化
 			disp.putstr(8,16,str(a[5]),disp.BLACK)
 		else:
 			disp.putstr(8,16,' '+str(a[5]),disp.BLACK)
-	if t7!=a[6]:
+	if t7!=a[6]:#如果秒信息发生变化，清除原来信息，显示新的信息
 		disp.putstr(11,16,str(t7),disp.WHITE)
 		t7=a[6]
 		disp.putstr(11,16,str(a[6]),disp.BLACK)
