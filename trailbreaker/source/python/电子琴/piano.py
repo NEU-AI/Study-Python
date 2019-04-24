@@ -7,15 +7,15 @@ i=0
 j=0
 k=0
 while True:
-	for i in range(0,4):
-		R[i].low()
+	for i in range(0,4):#选行
+		R[i].low()#将选中的行拉低
 		for k in range(0,4):
 			if k!=i:
-				R[k].high()
+				R[k].high()#将其他行拉高
 		for j in range(0,4):
-			if i==0 and j==0 and C[j].value()==0:
+			if i==0 and j==0 and C[j].value()==0:#如果选中第一行第一列，且按键被按下
 				print('1')
-				tm3=Timer(2, freq=262)
+				tm3=Timer(2, freq=262)#蜂鸣器声音
 				buzzer=tm3.channel(3, Timer.PWM, pin=x1,pulse_width_percent=50)
 				pyb.delay(100)
 				buzzer.pulse_width_percent(0)
