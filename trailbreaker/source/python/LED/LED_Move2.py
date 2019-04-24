@@ -195,4 +195,4 @@ def show_LED(word):
 	reser_Letter()#重置Letter
 	
 while True:
-	show_LED("I NEU")#最多输入8位
+	show_LED("I NEUAI")#最多输入8位
