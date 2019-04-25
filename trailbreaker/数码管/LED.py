@@ -13,14 +13,13 @@ display.disp_on()
 display._data(b"\x40")
 display._data(b"\xC0\xf0\x00\x0f\x00\x0f\x00\xf0\x00\xf0\x00\xf0\x00\xf0\x00\xf0\x00")
 
-while True:
-print("AIP1638 disp")
-pyb.delay(1000)
-display.disp_on()
-pyb.delay(1000)
-display.disp_off()
 
-disp_test()
+while True:
+	print("AIP1638 disp")
+	pyb.delay(1000)
+	display.disp_on()
+	pyb.delay(1000)
+	display.disp_off()
 
 
 
