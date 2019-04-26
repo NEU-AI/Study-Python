@@ -41,7 +41,7 @@ class GOES():
 		self.DEVICE_ID = "wc001"        #设备ID
 		self.TOPIC1 = b"/cloud-skids/online/dev/" + self.DEVICE_ID
 		self.TOPIC2 = b"/cloud-skids/message/server/" + self.DEVICE_ID
-		self.CLIENT_ID = "f25410646a8348f8a1726a3890ad8f73"
+		self.CLIENT_ID = "f25410646a8348f8a1726a3890ad8f74"
 		self.uart = UART(1, baudrate=115200, bits=8, parity=0, rx=18, tx=19, stop=1)
 		#设备状态
 		self.ON = "1"
