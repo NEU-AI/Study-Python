@@ -82,10 +82,10 @@ class DHT11:#定义DHT11类
         tmp=humidity+humidity_point+temperature+temperature_point
         if check==tmp:#检验正确，输出结果
             print('temperature is',temperature,'wet is',humidity,'%')
-	    global x1,y,x2
-	    disp.putpixel(x1+(temperature-25)*3,y,disp.RED)#红色表示温度
-	    disp.putpixel(x2+(humidity-15)*3,y,disp.BLUE)#蓝色表示湿度
-	    y+=1
+			global x1,y,x2
+			disp.putpixel(x1+(temperature-25)*3,y,disp.RED)#红色表示温度
+			disp.putpixel(x2+(humidity-15)*3,y,disp.BLUE)#蓝色表示湿度
+			y+=1
         else:#检验错误，输出数据结果
             print('SHUJUCUOWU',humidity,humidity_point,temperature,temperature_point,check)
         return str(temperature)+','+str(humidity)
