@@ -1,4 +1,5 @@
 from pyb import Pin,Timer
+import pyb
 tm2=Timer(2,freq=100)#初始化时钟
 tm3=Timer(3,freq=100)
 intensity4=0#初始化亮度

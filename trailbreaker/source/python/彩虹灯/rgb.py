@@ -1,4 +1,5 @@
 from pyb import Pin,Timer
+import pyb
 rgb=[Pin(i, Pin.OUT_PP) for i in ['Y1','Y2','Y3']]#初始化引脚
 tm3=Timer(3,freq=100)#初始化时钟
 tm8=Timer(8,freq=100)
