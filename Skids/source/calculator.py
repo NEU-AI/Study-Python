@@ -30,12 +30,12 @@ class calculator():
         self.selectYi = 0
 
         # 计算器变量
-        self.l_operand = 0
-        self.r_operand = 0
-        self.operator = 123
-        self.result = 0
-        self.dotFlag = 0
-        self.dotLoc = 0
+        self.l_operand = 0  # 左操作数
+        self.r_operand = 0  # 右操作数
+        self.operator = 123  # 运算符
+        self.result = 0  # 结果
+        self.dotFlag = 0  # 小数点标志
+        self.dotLoc = 0  # 小数点当前位置
 
         # 初始化界面
         self.displayInit()
@@ -212,14 +212,11 @@ class calculator():
 
     # 开始运行
     def start(self):
+        i = 0
         while True:
-            i = 0
-            j = -1
             for k in self.keys:
                 if (k.value() == 0):
-                    if i != j:
-                        j = i
-                        self.keyboardEvent(i)
+                    self.keyboardEvent(i)
                 i = i + 1
                 if (i > 3):
                     i = 0
