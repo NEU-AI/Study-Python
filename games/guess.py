@@ -23,9 +23,9 @@ class Game():
         self.computerStatus = 0
         self.computerMessage = ""
         pins = [36, 39, 34, 35]
-        keys = []
+        self.keys = []
         for p in pins:
-            keys.append(Pin(p, Pin.IN))
+            self.keys.append(Pin(p, Pin.IN))
         self.displayInit()
 
     def displayInit(self, x=10, y=10, w=222, h=303):
@@ -109,7 +109,7 @@ class Game():
         while True:
             for k in self.keys:
                 if (k.value() == 0):
-                    self.keyboardEvent(i)
+                    self.pressKeyboardEvent(i)
                 i = i + 1
                 if (i > 3):
                     i = 0
@@ -131,3 +131,4 @@ if __name__ == '__main__':
     screen.clear()
     newGame = Game("玩家", "电脑")
     newGame.startGame()
+
