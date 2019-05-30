@@ -42,8 +42,10 @@ def draw_star(center_x, center_y, radius, color):
 def star(center_x, center_y, radius, big_center_x, big_center_y):
     turtle.penup()
     turtle.goto(center_x, center_y)
-    turtle.pendown()
-    turtle.left(turtle.towards(big_center_x, big_center_y) - turtle.heading())
+    if center_x == big_center_x:
+        turtle.left(90)
+    else:
+        turtle.left(turtle.towards(big_center_x, big_center_y) - turtle.heading())
     turtle.forward(radius)
     turtle.right(90)
     draw_star(turtle.pos().x, turtle.pos().y, radius, 'yellow')
@@ -58,7 +60,7 @@ draw_rect(-width/2, height/2, 'red', width/2, -height/2)
 pice = width/30
 big_center_x = -width/3
 big_center_y = height/4
-star(big_center_x, big_center_y-1, pice*3, big_center_x, big_center_y)
+star(big_center_x, big_center_y, pice*3, big_center_x, big_center_y)
 star(-width/6, height*2/5, pice, big_center_x, big_center_y)
 star(-width/10, height*3/10, pice, big_center_x, big_center_y)
 star(-width/10, height*3/20, pice, big_center_x, big_center_y)
