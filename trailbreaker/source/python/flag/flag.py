@@ -1,9 +1,5 @@
-
-
-
 import lcd_show
 from lcd_show import *
-from font import *
 import pyb
 from pyb import Pin
 import time

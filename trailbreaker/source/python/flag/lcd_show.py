@@ -1,7 +1,5 @@
 import time
 import pyb
-import font
-from font import*
 from pyb import Pin
 
 print("start")
