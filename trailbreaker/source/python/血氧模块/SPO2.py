@@ -1,4 +1,5 @@
 from pyb import UART
+import time
 
 
 class SPO2:
@@ -60,14 +61,20 @@ class SPO2:
             spList.append(barGraph)
             spList.append(pulseRate)
             spList.append(spO2)
-
         return spList
+
+    def sleep(self, time):
+        count = time * 300
+        for i in range(count):
+            self.uart6.readchar()
 
 
 if __name__ == '__main__':
     sp = SPO2()
-    spList = sp.getSpList()
-    print(spList)
-    if len(spList) != 0:
-        print('PulseRate:', spList[3])
-        print('SPO2:', spList[4])
+    while True:
+        spList = sp.getSpList()
+        print(spList)
+        if len(spList) != 0:
+            print('PulseRate:', spList[3])
+            print('SPO2:', spList[4])
+        sp.sleep(1)
