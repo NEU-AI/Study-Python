@@ -74,11 +74,11 @@ class BH1750():
 		# output the sine-wave at 400Hz
 		dac = DAC(1)
 		dac.write_timed(buf, 400 * len(buf), mode=DAC.CIRCULAR)
+i2c=I2C(1,I2C.MASTER)
+#print ('setp1')
+S=BH1750(i2c)		
 while 1:
 	#print ('setp0')
-	i2c=I2C(1,I2C.MASTER)
-	#print ('setp1')
-	S=BH1750(i2c)
 	#print ('setp2')
 	S.luminance(BH1750.ONCE_HIRES_1)
 	#print ('setp3')
