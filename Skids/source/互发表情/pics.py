@@ -15,7 +15,7 @@ class pics():
 		self.keys = [Pin(p, Pin.IN) for p in [35, 36, 39, 34]]
 		self.keymatch = ["Key1", "Key2", "Key3", "Key4"]
 		self.select=1
-		self.contentisplayInit()
+		self.displayInit()
 		self.wifi_name = "NEUI"
 
 		self.wifi_SSID = "NEUI3187"
@@ -69,7 +69,7 @@ class pics():
 		screen.drawline(20, 272, 20, 200, 2, 0xff0000)
 	def displayInit(self):#初始化
 		screen.clear()
-		self.contentrawInterface()
+		self.drawInterface()
 		self.selectInit()
 	def esp(self):
 		self.client.set_callback(self.sub_cb)    #设置回调
