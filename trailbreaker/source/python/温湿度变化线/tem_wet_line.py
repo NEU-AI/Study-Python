@@ -32,25 +32,21 @@ class DHT11:#定义DHT11类
         N1.low()#拉低引脚
         time.sleep_ms(20)#保持20ms(最少18ms）
         N1.high()#拉高引脚
-		time.sleep_us(30)#保持30us(20~40us）
+        time.sleep_us(30)#保持30us(20~40us）
         #wait to response
         N1 = Pin(self.PinName,Pin.IN)#设置输入模式
         while N1.value()==1:#等待温度传感器响应
-			#print('1')
-			continue
+            continue
         while N1.value()==0:
-			#print('2')
-			continue
+            continue
         while N1.value()==1:
-			#print('3')
-			continue
+            continue
         #get data
         while j<40:#通过引脚接收数据
             k=0
             while N1.value()==0:
                 continue
             while N1.value()==1:
-				#print(k)
                 k+=1
                 if k>100:break
             if k<3:
@@ -82,15 +78,14 @@ class DHT11:#定义DHT11类
         tmp=humidity+humidity_point+temperature+temperature_point
         if check==tmp:#检验正确，输出结果
             print('temperature is',temperature,'wet is',humidity,'%')
-			global x1,y,x2
-			disp.putpixel(x1+(temperature-25)*3,y,disp.RED)#红色表示温度
-			disp.putpixel(x2+(humidity-15)*3,y,disp.BLUE)#蓝色表示湿度
-			y+=1
+            global x1,y,x2
+            disp.putpixel(x1+(temperature-25)*3,y,disp.RED)#红色表示温度
+            disp.putpixel(x2+(humidity-15)*3,y,disp.BLUE)#蓝色表示湿度
+            y+=1
         else:#检验错误，输出数据结果
             print('SHUJUCUOWU',humidity,humidity_point,temperature,temperature_point,check)
         return str(temperature)+','+str(humidity)
 while 1:
-	S=DHT11('Y4')#将Y4引脚传入DHT11类循环测量温湿度数值
-	A=S.read_temps()
-	#print(A)
-	pyb.delay(100)
+    S=DHT11('Y4')#将Y4引脚传入DHT11类循环测量温湿度数值
+    A=S.read_temps()
+    pyb.delay(100)
