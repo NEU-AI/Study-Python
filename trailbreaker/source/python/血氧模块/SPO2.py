@@ -1,10 +1,9 @@
 from pyb import UART
-import time
 
 
 class SPO2:
-    def __init__(self):
-        self.uart6 = UART(6, baudrate=4800, bits=8, parity=1, stop=1)
+    def __init__(self, uart):
+        self.uart = uart
 
     def fill(self, sData):
         l = len(sData)
@@ -20,12 +19,12 @@ class SPO2:
 
     def receiveData(self):
         while True:
-            byte1 = self.uart6.readchar()
+            byte1 = self.uart.readchar()
             if byte1 >= 128:
-                byte2 = self.uart6.readchar()
-                byte3 = self.uart6.readchar()
-                byte4 = self.uart6.readchar()
-                byte5 = self.uart6.readchar()
+                byte2 = self.uart.readchar()
+                byte3 = self.uart.readchar()
+                byte4 = self.uart.readchar()
+                byte5 = self.uart.readchar()
                 if byte2<128 and byte3<128 and byte4<128 and byte5<128:
                     dataList = ['', '', '', '', '']
                     dataList[0] = self.fill(bin(byte1)[2:])
@@ -51,6 +50,7 @@ class SPO2:
         elif (dataList[2][-6] == '1'):
             print("Detecting pulse rate")
         else:
+            print("Succeed to get data")
             signalStrength = self.binToInt(dataList[0][-4:])
             volumeGraph = self.binToInt(dataList[1][-7:])
             barGraph = self.binToInt(dataList[2][-4:])
@@ -66,15 +66,15 @@ class SPO2:
     def sleep(self, time):
         count = time * 300
         for i in range(count):
-            self.uart6.readchar()
+            self.uart.readchar()
 
 
 if __name__ == '__main__':
-    sp = SPO2()
+    uart6 = UART(6, baudrate=4800, bits=8, parity=1, stop=1)
+    sp = SPO2(uart6)
     while True:
         spList = sp.getSpList()
-        print(spList)
         if len(spList) != 0:
-            print('PulseRate:', spList[3])
-            print('SPO2:', spList[4])
-        sp.sleep(1)
+            print('PulseRate: ' + str(spList[3]))
+            print('BloodOxygen: ' + str(spList[4]))
+        sp.sleep(2)
